@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>inflearn-SpringBoot</title>
+<style type="text/css">
+html, body{
+	width: 100%;
+	height: 100%;
+	
+	margin: 0;
+	padding: 0;
+	
+}
+
+.main_wrapper {
+	display:flex;
+	flex-direction: column;
+	justify-content: center;
+	
+	width:100%;
+	height:100%;
+}
+
+.main_wrapper .title_wrapper {
+	font-size: 34px;
+	font-weight: 700;
+	box-sizing: border-box;
+	text-align: center;
+}
+
+.main_wrapper .contents_wrapper {
+	margin-top: 100px;
+	box-sizing: border-box;
+	text-align: center;
+	font-size: 28px;
+}
+
+</style>
+</head>
+<body>
+	<div class="main_wrapper">
+		<div class="title_wrapper">
+			this is Required Parameter Page.
+		</div>
+		<div class="contents_wrapper" th:text="'reqParam is' + ${data}">
+			
+		</div>
+	</div>
+</body>
+</html>
