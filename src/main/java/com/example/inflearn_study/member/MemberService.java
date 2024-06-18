@@ -1,6 +1,9 @@
 package com.example.inflearn_study.member;
 
+import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,35 +22,37 @@ public class MemberService {
 		this.memberRepository = repository;
 	}
 	
-//	private void checkDuplicatedUser(Optional<Member> result) {
-//		result.ifPresent(m -> {
-//			throw new IllegalStateException("이미 존재하는 회원입니다.");
-//			}
-//		);
-//	}
 	
-	/**
-	 * 회원가입
-	 * 
-	 * @param member
-	 * @return
-	 */
-//	public Long join(Member member) {
-//		//같은 이름의 회원은 가입할 수 없다고 가정.
-//		//중복체크
-//		Optional<Member> result = memberRepository.findByName(member.getName());
-//		
-//		checkDuplicatedUser(result);  
-//		
-//		memberRepository.save(member);
-//		return member.getMemberId();
-//	}
-//	
-//	public Optional<Member> findOne(Long id) {
-//		return memberRepository.findById(id);
-//	}
-	
-	public List<MemberEntity> findAll() {
-		return memberRepository.findAll();
+	public CreateMemberResponseDTO join(CreateMemberRequestDTO reqMemberInfo) {
+		CreateMemberResponseDTO respMemberInfo = new CreateMemberResponseDTO();
+		
+		// 아이디 중복 확인
+		if(!isDuplicateId(reqMemberInfo.getLoginId())) {
+			MemberEntity entity = MemberEntity.builder()
+											  .name(reqMemberInfo.getName())
+											  .loginId(reqMemberInfo.getLoginId())
+											  .password(reqMemberInfo.getPassword())
+											  .createDateTime(LocalDateTime.now())
+											  .lastLoginDateTime(LocalDateTime.now())
+											  .build();
+			
+			MemberEntity result = memberRepository.save(entity);
+			
+			if(result != null) {
+				respMemberInfo = CreateMemberResponseDTO.builder()
+														.loginId(result.getLoginId())
+														.memberId(result.getMemberId())
+														.name(result.getName())
+														.build();
+			}
+		} 
+
+		return respMemberInfo;
 	}
+
+
+	private boolean isDuplicateId(String loginId) {
+		return memberRepository.findByLoginId(loginId).isPresent();
+	}
+	
 }
