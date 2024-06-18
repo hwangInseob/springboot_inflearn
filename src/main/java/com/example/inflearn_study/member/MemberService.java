@@ -51,7 +51,7 @@ public class MemberService {
 	}
 
 
-	private boolean isDuplicateId(String loginId) {
+	public boolean isDuplicateId(String loginId) {
 		return memberRepository.findByLoginId(loginId).isPresent();
 	}
 	
