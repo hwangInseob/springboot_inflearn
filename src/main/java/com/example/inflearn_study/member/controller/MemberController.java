@@ -1,4 +1,4 @@
-package com.example.inflearn_study.member;
+package com.example.inflearn_study.member.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -7,6 +7,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.example.inflearn_study.member.dto.CreateMemberRequestDTO;
+import com.example.inflearn_study.member.dto.CreateMemberResponseDTO;
+import com.example.inflearn_study.member.service.MemberService;
 
 @RestController
 public class MemberController {

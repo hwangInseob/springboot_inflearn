@@ -1,4 +1,4 @@
-package com.example.inflearn_study.member;
+package com.example.inflearn_study.member.service;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -8,6 +8,11 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.example.inflearn_study.member.dto.CreateMemberRequestDTO;
+import com.example.inflearn_study.member.dto.CreateMemberResponseDTO;
+import com.example.inflearn_study.member.entity.MemberEntity;
+import com.example.inflearn_study.member.repository.MemberRepository;
 
 import jakarta.transaction.Transactional;
 

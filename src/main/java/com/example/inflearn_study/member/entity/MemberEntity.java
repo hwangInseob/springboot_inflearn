@@ -1,4 +1,4 @@
-package com.example.inflearn_study.member;
+package com.example.inflearn_study.member.entity;
 
 import java.time.LocalDateTime;
 

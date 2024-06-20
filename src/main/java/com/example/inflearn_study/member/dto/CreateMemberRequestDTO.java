@@ -1,4 +1,4 @@
-package com.example.inflearn_study.member;
+package com.example.inflearn_study.member.dto;
 
 import lombok.Getter;
 import lombok.Setter;
