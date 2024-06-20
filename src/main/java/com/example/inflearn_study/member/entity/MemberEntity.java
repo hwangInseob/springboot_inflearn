@@ -2,6 +2,9 @@ package com.example.inflearn_study.member.entity;
 
 import java.time.LocalDateTime;
 
+
+import com.example.inflearn_study.member.dto.CreateMemberRequestDTO;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -43,4 +46,14 @@ public class MemberEntity {
 	
 	@Column(name = "last_login_datetime")
 	private LocalDateTime lastLoginDateTime;
+	
+	static public MemberEntity toMemberEntity(CreateMemberRequestDTO dto) {
+		MemberEntity entity = new MemberEntity();
+		
+		entity.setLoginId(dto.getLoginId());
+		entity.setName(dto.getName());
+		entity.setPassword(dto.getPassword());
+		
+		return entity;
+	}
 }

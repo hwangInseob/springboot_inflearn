@@ -15,17 +15,13 @@ import com.example.inflearn_study.member.entity.MemberEntity;
 import com.example.inflearn_study.member.repository.MemberRepository;
 
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 @Transactional
 public class MemberService {
-	
-	@Autowired
 	private final MemberRepository memberRepository;
-	
-	MemberService(MemberRepository repository) {
-		this.memberRepository = repository;
-	}
 	
 	
 	public CreateMemberResponseDTO join(CreateMemberRequestDTO reqMemberInfo) {
@@ -33,13 +29,9 @@ public class MemberService {
 		
 		// 아이디 중복 확인
 		if(!isDuplicateId(reqMemberInfo.getLoginId())) {
-			MemberEntity entity = MemberEntity.builder()
-											  .name(reqMemberInfo.getName())
-											  .loginId(reqMemberInfo.getLoginId())
-											  .password(reqMemberInfo.getPassword())
-											  .createDateTime(LocalDateTime.now())
-											  .lastLoginDateTime(LocalDateTime.now())
-											  .build();
+			
+			
+			MemberEntity entity = MemberEntity.toMemberEntity(reqMemberInfo);
 			
 			MemberEntity result = memberRepository.save(entity);
 			
